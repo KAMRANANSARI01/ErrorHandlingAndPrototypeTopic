@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling and Prototype</title>
+</head>
+<body>
+    <script>
+         
+
+//  ERROR HANDLING AND PROTOTYPE::
+
+// 1.Try and Catch
+
+
+// In JavaScript, the try and catch statements are used together to handle exceptions or errors that may occur during the execution of a block of code. The try block contains the code that might generate an error, and the catch block is where the error is caught and handled.
+// Here's the basic syntax for using try and catch in JavaScript:
+
+// try {
+//     // Code that might generate an error
+//     // ...
+// } catch (error) {
+//     // Code to handle the error
+//     // ...
+// }finally{
+//  console.log("its always executed")
+// }
+//example of try catch and finally.
+
+// try{
+//     let x = undefined;
+//     console.log(x[0])
+// }catch(error){
+//     console.log("error handling in catch",error)// error shows what is the error in try.
+// }finally{
+//     console.log("finally always executed.")
+// }
+///**********OBJECT ORIANTED PROGRAMMING*********//
+// defining A Classes, Class instantiation...
+// syntax of making class and object...
+// class is used to make a blue print of any design 
+
+// class product {
+//     // adding property of the product
+//     name ;
+//     price ;
+//     rating ;
+
+//     //making behaviour -> funtion -> called member funtion
+//     display(){
+//         console.log("displaying tha current product.")
+//     }
+// }
+
+// //now we adding class into a variable.
+// let p = new product(); // here new make a new empty object.
+// console.log(p)//output=> product {name: undefined, price: undefined, rating: undefined}
+
+// // if u want to process member function
+
+// p.display(); //output => displaying tha current product.
+
+//now we learn how to make a whole class(blueprint) and by helping class how we make object..
+
+// class product {
+//     // name;
+//     // price;      // after writing this.name , this.price and so on...so we can skip writing here name,price,rating...etc.
+//     // rating;
+
+//     //here we are making our constructor method. bcz constructor works as a fucntion so we can add parameter. 
+//     constructor(n,p,r){
+//         this.name = n;
+//         this.price = p;
+//         this.rating = r;
+//     }
+//     //adding behaviour function..
+//     display(){
+//        console.log("this is ",this)//output=> product {name: 'Iphone', price: 70000, rating: 5}
+//     }
+// }
+
+//const p = new product("Iphone",70000,5);//passing argument for constructor function.
+//console.log(p)//when p is called then it calls the constructor firsts thats why constructor function execute first.so we can assign the argument in the product.
+//p.display();//here we are calling display(member function) which is called by p(new object) so in the display function this keyword reffers to the p object..
+//in the above piece of code we are calling the constructor method. with every class a default constructor exist inbuilt. and we can also write our constructor method in class..
+// whenever we  r making a new object firstly constructor method is called..
+ // now output => product {name: 'Iphone', price: 70000, rating: 5}
+
+
+ // this keyword refers to calling function in this case calling fuction of constructor is p(new plain object).so here this reffers to new object.
+
+//  suppose that here a empty Object
+//  let t = {}
+//  t.a=10;
+//  t.b=20; so the output will be {a=10,b=20}
+
+
+// so this reffers to p(empty object)
+// so we r writing 
+// this.name = n and so on..
+
+
+//before es6 we made blueprint by using of function..(fuction constructor)
+// function product(n,p,r){
+//     this.name = n;
+//     this.price = p;
+//     this.rating = r;
+// }
+// let p = new product(Iphone , 50000, 4);
+// console.log(p);
+
+
+//class methods and properties with initial value...
+
+// making a static function or method and its uses.
+// class product {
+//     #rating //here #applied bcz now noone can upgrade the rating...now it became private.
+//     constructor (n,p,r){
+//         this.name = n;
+//         this.price = p;
+//         this.#rating = r;
+//     }
+
+//     static custom(){
+//          console.log("calling a costum.")
+//     }
+//     display(){
+//         console.log("display current product",this.name,this.price,this.#rating)//here we use #bcz we are accessing private.
+//     }
+// }
+// const p = new product('Iphone',40000,4);
+// console.log(p);
+// console.log(p.name); //output = iphone..
+// p.name = "samsung"
+// console.log(p.name);//now we can upgrade also..output is samsung..
+
+// //p.custom();//it will thorw an error bcz u can't call static method with object.it's class property its attach with class so if u want to call a custom method then we have to call static method by class name.
+// // product.costum();
+
+// p.display();
+
+
+
+//getter and setter topic.....
+//  class product {
+//       #name;
+//       #price;
+//       #rating;
+//       constructor(n,p,r){
+//         this.#name =n;
+//         this.#price =p;
+//         this.#rating =r;
+//       }
+//       getrating(){
+//         console.log(this.#rating)
+//       }
+//       setrating(r){
+//         if(r<0) return; //here we can write logic also.
+//         this.#rating = r;
+//       }
+//  }
+//  let p = new product("iphone",50000,5)
+//  console.log(p);
+//  console.log(p.name) //output undifind bcz we made it private using #. now we have use get and set method to get the access of the element.
+// p.setrating(15)//now we can update the rating now rating 15.
+// p.getrating()
+
+
+
+// now we write a class of a complex number and add two complex number.//
+
+// class complexNumber{
+//     #real;
+//     #imag;
+
+//     constructor(r,i){
+//         this.#real = r;
+//         this.#imag = i;
+//     }
+
+//     display(){
+//         console.log(`${this.#real} + i ${this.#imag}`)
+//     }
+
+//       get real(){
+//        return this.#real;
+//     }
+//       get imag(){
+//        return this.#imag;
+//     }
+//     addCoplexNumber(c){
+//        this.#real += c.real;
+//        this.#imag += c.imag;
+//     }
+  
+// }
+// let c1 = new complexNumber(2,4);
+// console.log(c1)
+// c1.display();
+
+// let c2 = new complexNumber(4,5);
+// c1.addCoplexNumber(c2);
+// c1.display();
+
+
+//*******now we will learn about the prototype *******//
+
+// for understanding the uses of prototype here we are going to make a library in which we add a method called 'truelength' that will  work only in string not in array or object etec..
+
+// let myHeros = ["thor","spiderman"]
+// let dcHeros = ["batman","flash","superman"]
+
+// let herosPower = {
+//     thor : "hammer",
+//     spiderman : "sling"
+
+//     spidermanPower: function(){
+//         console.log(`spidy power is ${this.spiderman}`)
+//     }
+// }
+// Object.prototype.kamran = function(){
+//     console.log("Kamran is here in all object.")
+// }
+// console.log(myHeros.kamran())
+// console.log(herosPower.kamran())
+// //here myheros is array although kamran is here in all object is present here.
+// // bcz arrays me object hota hai isliye iske pass access hai..or object ke pass bhi.
+
+// // lekin sirf arrays ko access ho aesa function banane ke liye...
+
+// Array.prototype.heyKamran = function(){
+//     console.log('i am here.')
+// }
+// console.log(myHeros.kamran())//output i am here.
+// console.log(herosPower.kamran())//throw an error bcz heyKamran only present in array..
+ 
+
+//now we learn about inheritance.
+
+// let user={
+//     name:"top name",
+//     email:"top@gmail.com"
+
+// }
+
+// let teacher ={
+//     makingVideos : true
+// }
+// let teachingSupport = {
+//     isAvailable : false
+// }
+// let taAssistant ={
+//     makeAssignment : "js assignment",
+//     fullTime : true,
+//     __proto__:teachingSupport
+// }
+// console.log(taAssistant.isAvailable)// output false..
+//now suppose we want all property or method of teachingSupport in taAssistant object so we have two ways first is old way and second is new way..in old way we write in taAssistant object __proto__:here we write object name whose property we want to add .
+
+// in old way we  also write outside the object.in following ways.
+
+// teacher.__proto__ = user
+
+// // in new way we write code following.
+// // in modern js we use this syntax
+// Object.setPrototypeOf(teachingSupport,teacher)
+//output teachingsupport ki property teacher me assign hogyi..
+
+// now we add a truelength property in only string.
+
+// String.prototype.truelength = function(){
+//     console.log(`true length of string is ${this.trim().length}`)
+// }
+// "kamran    ".truelength();//true length of string is 6
+// "sunny        ".truelength();//output=
+// // true length of string is 5
+// //this is how we can a make a new method.here we made truelength() method.
+
+
+//first program in closure and understanding clouser....
+
+//  function one(){
+//    let   score = 0;
+//     console.log(score)
+//  }
+//  one()//output => 0
+// console.log(score)//output => error bcz score function ke scope ke anddr mention hai jiska access bhr nhi hai .. 
+// let score=2;
+// function one(){
+//    let   score = 0;
+//     console.log(score)
+//  }
+//  one()//output => 0
+//  console.log(score)//now output is 2 bcz score is defined globlly out of the function scope..
+
+// let score=2;
+// function one(){
+//    let   score = 0;
+//     console.log(score)
+//  }
+
+//  function two(){
+//     let score = 3;
+//     console.log(score)
+//  }
+
+//  function three(){
+//     console.log(score)
+//  }
+
+//  one()//output => 0
+//  two()//output => 3
+//  three()//output => 2 bcz function ke ader ka console(score) bahr globally access kerlega isliye output 2 hai bcz score 2 globally define hai ..but bahr ka console.log(score) kisi function scope ke ander ka access nhi le payega...
+
+// console.log(score)//output => 2.
+
+
+//now we understad the function nesting.
+
+// function outerfunc (){
+//     let outerVal = "I am at scope level 1."
+//     function innerfunc(){
+//         console.log(outerVal);
+//     }
+//     innerfunc()
+// }
+// outerfunc() 
+// //output is i am at scope level 1. bcz innerfunction me console.log(outerval) kiye to innerfunc ke scope me ye define nhi tha but inner scope wala outer scope me define value access kar sakta hai. aur fir outerfunction ko call kiye to ye output mila..
+
+
+// function outerfunc (){
+//     let outerVal = "I am at scope level 1."
+//     function innerfunc(){
+//         let innerVal = "I am at scope level 2."
+//         console.log(outerVal);
+//     }
+//     console.log(innerVal);// it will thrw an error bcz ye innerval ko access nhi ker payega kuki vo functin scope me hai r ye outside hai console.log(innerVal).
+//     innerfunc()
+// }
+// outerfunc() 
+
+// let globalValue = 0
+
+// function func(){
+//     const val1 = 1;
+//     console.log( val1,globalValue)
+//     function innerFunc(){
+//         const val2 = 2;
+//         console.log(val2,val1,globalValue);
+//         function innerofinner(){
+//             const val3 = 3;
+//             console.log(val3,val2,val1,globalValue)
+
+//         }
+//         innerofinner();
+//     }
+//     innerFunc();
+// }
+// func();
+//output=>1 0
+        //2 1 0
+        //3 2 1 0
+// before what we have learnt it was a basic understanding of the lexical scoping now we are gonna understand the closure
+
+// function superfun(){
+//      let outerValue = "I am outer"
+//      function minerfun(){
+//         console.log(outerValue)
+//      }
+//      minerfun()
+// }
+//  superfun()//the output is I am outer.
+// inner scope can access the outer scope value but outer scope cant access the inner scope value and this is called the closure.
+
+// now we will understand the real use of closure in the industry.
+
+// let errormsg = "page not found ERROR 404"
+// setTimeout(function callback(){
+//     console.log(errormsg)
+// },2000)
+
+
+    </script>
+
+</body>
+</html>
